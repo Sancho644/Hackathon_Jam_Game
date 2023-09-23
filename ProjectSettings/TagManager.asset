@@ -6,6 +6,8 @@ TagManager:
   tags:
   - SfxAudioSource
   - MusicAudioSource
+  - Tale1Object
+  - InventoryBox
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - UI
   - NpcLayer
   - ObjectLayer
-  - 
+  - InventoryObjectLayer
   - 
   - 
   - 

@@ -14,10 +14,6 @@ namespace UI.Dialogs
 
         [Space] [SerializeField] private float _textSpeed = 0.09f;
 
-        [Header("Sounds")] [SerializeField] private AudioClip _typing;
-        [SerializeField] private AudioClip _open;
-        [SerializeField] private AudioClip _close;
-
         [Space] [SerializeField] protected DialogContent _content;
 
         private static readonly int isOpen = Animator.StringToHash("isOpen");
@@ -31,10 +27,9 @@ namespace UI.Dialogs
 
         protected Sentence CurrentSentence => _data.Sentence[_currentSentence];
 
-        private void Start()
+        private void Awake()
         {
             _rightBox = FindObjectOfType<PersonalizedDialogBoxController>();
-            _sfxSource = AudioUtils.FindSfxSource();
         }
 
         public void ShowDialog(DialogData data, UnityEvent onComplete)
@@ -47,7 +42,6 @@ namespace UI.Dialogs
             _blackPlate.SetActive(true);
             _player.SetActive(true);
             _container.SetActive(true);
-            _sfxSource.PlayOneShot(_open);
             _animator.SetBool(isOpen, true);
         }
 
@@ -87,7 +81,6 @@ namespace UI.Dialogs
         private void HideDialogBox()
         {
             _animator.SetBool(isOpen, false);
-            _sfxSource.PlayOneShot(_close);
             _blackPlate.SetActive(false);
             _player.SetActive(false);
         }
@@ -114,7 +107,6 @@ namespace UI.Dialogs
             foreach (var letter in localizedSentence)
             {
                 CurrentContent.Text.text += letter;
-                _sfxSource.PlayOneShot(_typing);
                 yield return new WaitForSeconds(_textSpeed);
             }
 

@@ -22,8 +22,8 @@ public static class TaleSaves
 public enum TalesNames
 {
     TaleScene = 0,
-    Tale2 = 0,
-    Tale3 = 0,
-    Tale4 = 0,
-    Tale5 = 0,
+    TaleScene2 = 1,
+    TaleScene3 = 2,
+    TaleScene4 = 3,
+    TaleScene5 = 4,
 }

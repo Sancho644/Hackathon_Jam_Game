@@ -1,4 +1,5 @@
 ﻿using UI.Dialogs;
+using UI.Hud;
 using UnityEngine;
 
 public class MouseSelectionController : MonoBehaviour
@@ -6,28 +7,39 @@ public class MouseSelectionController : MonoBehaviour
     private const string NpcLayer = "NpcLayer";
     private const string ObjectLayer = "ObjectLayer";
 
-    [SerializeField] private Texture2D cursorTexture;
+    [SerializeField] private FollowCursor _followCursor;
     [SerializeField] private float _maxDistance;
 
-    private Camera _camera;
+    private int _currentFrame;
+    private float _frameTimer;
 
     private LayerMask _npcLayer;
     private LayerMask _objectLayer;
 
     private RaycastHit _npcHit;
     private RaycastHit _objectHit;
+    private RaycastHit _inventoryHit;
+
     private bool _cursorIsScanning;
+    private bool _disableAnimate;
+
+    public bool IsScanning => _cursorIsScanning;
 
     private void Start()
     {
-        _camera = Camera.main;
-
         _npcLayer = 1 << LayerMask.NameToLayer(NpcLayer);
         _objectLayer = 1 << LayerMask.NameToLayer(ObjectLayer);
     }
 
     private void Update()
     {
+        if (Input.GetMouseButtonDown(1) && _cursorIsScanning)
+        {
+            SetScanCursor();
+            
+            return;
+        }
+        
         if (Input.GetMouseButtonDown(0))
         {
             Select();
@@ -39,14 +51,22 @@ public class MouseSelectionController : MonoBehaviour
         _cursorIsScanning = !_cursorIsScanning;
 
         if (_cursorIsScanning)
-            Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+        {
+            FindObjectOfType<HudController>().EnableScanTutor();
+            _followCursor.SetActive(true);
+            Cursor.visible = false;
+        }
         else
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        {
+            FindObjectOfType<HudController>().DisableScanTutor();
+            _followCursor.SetActive(false);
+            Cursor.visible = true;
+        }
     }
 
     private void Select()
     {
-        var ray = _camera.ScreenPointToRay(Input.mousePosition);
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         TryShowDialog(ray);
 
@@ -59,15 +79,32 @@ public class MouseSelectionController : MonoBehaviour
         {
             if (_objectHit.collider.TryGetComponent<ObjectController>(out ObjectController objectController))
             {
+                if (TaleSaves.GetSave(objectController.SaveKey).ObjectFound)
+                {
+                    _followCursor.ScanFailed();
+
+                    return;
+                }
+                
+                _followCursor.ScanSuccessfull();
                 objectController.SetObjectFound();
+                SetScanCursor();
 
                 Destroy(_objectHit.collider.gameObject);
             }
+        }
+
+        if (_cursorIsScanning)
+        {
+            _followCursor.ScanFailed();
         }
     }
 
     private void TryShowDialog(Ray ray)
     {
+        if (_cursorIsScanning)
+            return;
+
         if (Physics.Raycast(ray, out _npcHit, _maxDistance, _npcLayer))
         {
             if (_npcHit.collider.gameObject.TryGetComponent<ShowDialogComponent>(

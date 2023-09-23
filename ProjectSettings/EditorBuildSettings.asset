@@ -6,9 +6,33 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: be010897e95cbb94086d87192905af22
+  - enabled: 1
+    path: Assets/Scenes/StoryScene.unity
+    guid: 6eb8c070295960943a05398de3d464db
+  - enabled: 1
+    path: Assets/Scenes/TutorScene.unity
+    guid: b829f9c5f58e682429d6c35a7f1c150f
+  - enabled: 1
     path: Assets/Scenes/TalesChoseScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/TaleScene.unity
     guid: 4e9e513c5953257409d2b442f2901cef
+  - enabled: 1
+    path: Assets/Scenes/TaleScene2.unity
+    guid: 9dd77bb926bd20f4abc418c91a910fa4
+  - enabled: 1
+    path: Assets/Scenes/TaleScene3.unity
+    guid: a775d014a317a474db9e6b8d67ca2d94
+  - enabled: 1
+    path: Assets/Scenes/TaleScene4.unity
+    guid: c73760d7fc4fd9e4fb47138990bebfa3
+  - enabled: 1
+    path: Assets/Scenes/TaleScene5.unity
+    guid: b94ce72112f0b6748bcec82996429ba5
+  - enabled: 1
+    path: Assets/Scenes/EndScene.unity
+    guid: ef5aa690c36daf1439349c7eae11e6aa
   m_configObjects: {}
