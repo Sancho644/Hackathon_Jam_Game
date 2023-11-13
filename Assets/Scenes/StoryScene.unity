@@ -156,9 +156,9 @@ RectTransform:
   m_Father: {fileID: 903605057}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 682, y: -265}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -280, y: 291}
   m_SizeDelta: {x: 507, y: 479}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &398507282
@@ -769,6 +769,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 903605057}
     m_Modifications:
+    - target: {fileID: 1214850193588522483, guid: 16f29043bbf33f14e86cebe9efab4163, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1214850194159653626, guid: 16f29043bbf33f14e86cebe9efab4163, type: 3}
       propertyPath: m_Name
       value: PersonalizedDialogBox
@@ -866,6 +870,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1214850195443069429, guid: 16f29043bbf33f14e86cebe9efab4163, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1214850195452530776, guid: 16f29043bbf33f14e86cebe9efab4163, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
