@@ -48,7 +48,7 @@ public class FollowCursor : MonoBehaviour
 
     private void UpdatePosition()
     {
-        GetComponent<RectTransform>().anchoredPosition = Input.mousePosition;
+        GetComponent<RectTransform>().position = Input.mousePosition;
     }
 
     private void StopCurrentCoroutine()
